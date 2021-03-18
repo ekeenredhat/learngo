@@ -101,28 +101,6 @@ func main() {
 	}
 
 	for turn := 0; turn < maxTurns; turn++ {
-<<<<<<< HEAD
-		n := rand.Intn(guess + 1)
-		fmt.Println("Turn:", turn)
-		if n == guess {
-			if turn == 0 {
-				fmt.Println("You won on your first try!")
-			}
-			fmt.Println("🎉  YOU WIN!")
-			// if n is even, print w[0], else print w[1]
-			//fmt.Println("n:", n)
-			if n%2 == 0 {
-				fmt.Println(w[0])
-			} else {
-				fmt.Println(w[1])
-			}
-
-			return
-		}
-	}
-
-	fmt.Println("☠️  YOU LOST... Try again?")
-=======
 		n := rand.Intn(guess) + 1
 
 		if n == guess {
@@ -146,5 +124,4 @@ func main() {
 		fmt.Printf(msg, "* Oh no, loser")
 
 	}
->>>>>>> 2da8730746d42d21b8836a93f68cfd15cfec6d11
 }
