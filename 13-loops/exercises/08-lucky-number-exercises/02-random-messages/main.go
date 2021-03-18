@@ -8,31 +8,69 @@
 
 package main
 
-// ---------------------------------------------------------
-// EXERCISE: Random Messages
-//
-//  Display a few different won and lost messages "randomly".
-//
-// HINTS
-//  1. You can use a switch statement to do that.
-//  2. Set its condition to the random number generator.
-//  3. I would use a short switch.
-//
-// EXAMPLES
-//  The Player wins: then randomly print one of these:
-//
-//  go run main.go 5
-//    YOU WON
-//  go run main.go 5
-//    YOU'RE AWESOME
-//
-//  The Player loses: then randomly print one of these:
-//
-//  go run main.go 5
-//    LOSER!
-//  go run main.go 5
-//    YOU LOST. TRY AGAIN?
-// ---------------------------------------------------------
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
+//declare constants
+const (
+	maxTurns = 5
+	usage    = `Welcome message. THis program will be %d random numbers.
+	Good luck asshole!`
+)
 
 func main() {
+
+	//generate randon number
+	rand.Seed(time.Now().UnixNano())
+
+	//Capture arguments, ignoring the first point and capturing to the end of the slice
+	args := os.Args[1:]
+
+	//Ensure that the arguments isn't empty
+	if len(args) != 1 {
+		fmt.Println("Pick a number")
+		return
+	}
+	//Convert arguments from String to Int
+	guess, err := strconv.Atoi(args[0])
+
+	if err != nil {
+		fmt.Println("Not a number", err)
+		return
+	}
+
+	if (guess <= 0) || (guess > 10) {
+		fmt.Println("Pick a positive number, between 1 and 10")
+		return
+	}
+
+	for turn := 0; turn < maxTurns; turn++ {
+		n := rand.Intn(guess) + 1
+
+		if n == guess {
+			switch rand.Intn(3) {
+			case 0:
+				fmt.Println("You win, dick!")
+			case 1:
+				fmt.Println("Have a nice day, winner")
+			case 2:
+				fmt.Println("Great job winning!")
+			}
+			return
+		}
+	}
+	msg := "%s try again?\n"
+
+	switch rand.Intn(2) {
+	case 0:
+		fmt.Printf(msg, "* You lost")
+	case 1:
+		fmt.Printf(msg, "* Oh no, loser")
+
+	}
 }
