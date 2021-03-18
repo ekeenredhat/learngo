@@ -75,29 +75,6 @@ Wanna play?
 )
 
 func main() {
-<<<<<<< HEAD
-	rand.Seed(time.Now().UnixNano())
-
-	args := os.Args[1:]
-	w := [2]string{
-		"You're awesome",
-		"Way to Go!",
-	}
-	if len(args) != 1 {
-		// fmt.Println("Pick a number.")
-		fmt.Printf(usage, maxTurns)
-		return
-	}
-
-	guess, err := strconv.Atoi(args[0])
-	if err != nil {
-		fmt.Println("Not a number.")
-		return
-	}
-
-	if guess < 0 {
-		fmt.Println("Please pick a positive number.")
-=======
 
 	//generate randon number
 	rand.Seed(time.Now().UnixNano())
@@ -120,7 +97,6 @@ func main() {
 
 	if (guess <= 0) || (guess > 10) {
 		fmt.Println("Pick a positive number, between 1 and 10")
->>>>>>> 2da8730746d42d21b8836a93f68cfd15cfec6d11
 		return
 	}
 

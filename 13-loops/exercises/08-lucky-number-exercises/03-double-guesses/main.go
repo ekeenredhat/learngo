@@ -54,6 +54,7 @@ func main() {
 	// 1. Create a for loop to iterate through the len(args) to create Guess1 and Guess2 Ints
 	// 2. Create a separate method to validate and return acceptable Guess1 and Guess2
 	// 3. Create a slice for the Guesses
+	// 4. Simple approach, create a Guess2 without the loop
 
 	//Convert arguments from String to Int
 	guess, err := strconv.Atoi(args[0])
@@ -63,18 +64,32 @@ func main() {
 		return
 	}
 
-	if (guess <= 0) || (guess > 10) {
+	guess2, err2 := strconv.Atoi(args[1])
+	if err2 != nil {
+		fmt.Println("not a number!")
+		return
+	}
+
+	if (guess <= 0) || (guess > 10) || (guess2 <= 0) || (guess2 > 10) {
 		fmt.Println("Pick a positive number, between 1 and 10")
 		return
 	}
 
 	for turn := 0; turn < maxTurns; turn++ {
-		n := rand.Intn(guess) + 1
+		var largerNumber int
 
-		if n == guess {
+		if guess > guess2 {
+			largerNumber = guess
+		} else {
+			largerNumber = guess2
+		}
+
+		n := rand.Intn(largerNumber) + 1
+
+		if n == guess || n == guess2 {
 			switch rand.Intn(3) {
 			case 0:
-				fmt.Println("You win, dick!")
+				fmt.Println("You win, mate!")
 			case 1:
 				fmt.Println("Have a nice day, winner")
 			case 2:
