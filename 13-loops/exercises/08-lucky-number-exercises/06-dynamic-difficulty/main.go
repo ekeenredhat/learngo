@@ -6,8 +6,6 @@
 // In-person training  : https://www.linkedin.com/in/inancgumus/
 // Follow me on twitter: https://twitter.com/inancgumus
 
-package main
-
 // ---------------------------------------------------------
 // EXERCISE: Dynamic Difficulty
 //
@@ -48,5 +46,107 @@ package main
 //  guess number.
 // ---------------------------------------------------------
 
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
+)
+
+//declare constants
+const (
+	usage = `Welcome message. THis program will be %d random numbers.
+	Good luck asshole!`
+)
+
 func main() {
+
+	//generate randon number
+	rand.Seed(time.Now().UnixNano())
+
+	//Capture arguments, ignoring the first point and capturing to the end of the slice
+	args := os.Args[1:]
+
+	//Ensure that they provide two numbers
+	if len(args) < 2 {
+		fmt.Println("Pick two numbers")
+		return
+	}
+
+	// Check if verbose mode flag and set true if so
+	vb := false
+	if args[0] == "-v" {
+		vb = true
+	}
+
+	//Convert arguments from String to Int
+	guess, err := strconv.Atoi(args[len(args)-2])
+
+	if err != nil {
+		fmt.Println("Not a number", err)
+		return
+	}
+
+	guess2, err2 := strconv.Atoi(args[len(args)-1])
+	if err2 != nil {
+		fmt.Println("not a number!")
+		return
+	}
+
+	if (guess <= 0) || (guess2 <= 0) {
+		fmt.Println("Pick a positive number")
+		return
+	}
+
+	var largerNumber int
+	var maxTurns int
+
+	if guess > guess2 {
+		largerNumber = guess
+	} else {
+		largerNumber = guess2
+	}
+
+	if largerNumber > 15 && largerNumber < 30 {
+		maxTurns = largerNumber / 2
+	}
+	if largerNumber >= 30 && largerNumber < 50 {
+		maxTurns = largerNumber / 4
+	}
+	if largerNumber >= 50 && largerNumber < 100 {
+		maxTurns = largerNumber / 6
+	}
+
+	for turn := 0; turn < maxTurns; turn++ {
+		if largerNumber < 10 {
+			largerNumber = 10
+		}
+		n := rand.Intn(largerNumber) + 1
+		if vb {
+			fmt.Printf("%d ", n)
+		}
+		if n == guess || n == guess2 {
+			switch rand.Intn(3) {
+			case 0:
+				fmt.Println("You win, mate!")
+			case 1:
+				fmt.Println("Have a nice day, winner")
+			case 2:
+				fmt.Println("Great job winning!")
+			}
+			return
+		}
+	}
+	msg := "%s try again?\n"
+
+	switch rand.Intn(2) {
+	case 0:
+		fmt.Printf(msg, "* You lost")
+	case 1:
+		fmt.Printf(msg, "* Oh no, loser")
+
+	}
 }
