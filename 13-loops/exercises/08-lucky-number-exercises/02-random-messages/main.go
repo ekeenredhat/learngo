@@ -16,23 +16,6 @@ import (
 	"time"
 )
 
-//declare constants
-const (
-	maxTurns = 5
-	usage    = `Welcome message. THis program will be %d random numbers.
-	Good luck asshole!`
-)
-
-package main
-
-import (
-	"fmt"
-	"math/rand"
-	"os"
-	"strconv"
-	"time"
-)
-
 const (
 	maxTurns = 5 // less is more difficult
 	usage    = `Welcome to the Lucky Number Game! 🍀
