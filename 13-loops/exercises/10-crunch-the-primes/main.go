@@ -44,7 +44,7 @@ func main() {
 
 	//Get numbers from the command line
 	numbers := os.Args[1:]
-	if len(num) < 1 {
+	if len(numbers) < 1 {
 		fmt.Println("Enter some numbers")
 	}
 
@@ -52,8 +52,8 @@ func main() {
 	for _, n := range numbers {
 		//convert each one to an int
 		num, _ := strconv.Atoi(n)
-		if big.NewInt(num).ProbablyPrime == true {
-			fmt.Printf(num)
+		if big.NewInt(num).ProbablyPrime(0) {
+			fmt.Println(num)
 		}
 	}
 
